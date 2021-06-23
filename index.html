@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Track</title>
+</head>
+
+<body>
+    <section style="display: flex; flex-direction: column; justify-content: center; align-items:center;">
+        <h1>Download Counter</h1>
+        <p>The file is downloaded <span class="counter-text">0</span> times.</p>
+        <button class="download-button">Download</button>
+    </section>
+    <script>
+
+        readWriteFile('read');
+
+        var count = document.querySelector('.counter-text');
+        var button = document.querySelector('.download-button');
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            readWriteFile('write');
+        });
+
+        function readWriteFile(status) {
+
+            var url = 'counter_handler.php';
+
+            if (status == 'read') {
+                url += '?data=get'
+            } else if (status == 'write') {
+                url += '?data=increase'
+            }
+
+            const Http = new XMLHttpRequest();
+            Http.open('GET', url, true);
+            Http.send();
+
+            Http.onload = function () {
+                var response = JSON.parse(this.responseText);
+                count.innerHTML = response.download;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
