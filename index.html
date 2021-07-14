@@ -12,6 +12,7 @@
         <h1>Download Counter</h1>
         <p>The file is downloaded <span class="counter-text">0</span> times.</p>
         <button class="download-button">Download</button>
+        <a href="https://github.com/sayedulsayem/download-counter-without-database/archive/refs/heads/master.zip" class="download-button">Download</a>
     </section>
     <script>
 
@@ -20,7 +21,7 @@
         var count = document.querySelector('.counter-text');
         var button = document.querySelector('.download-button');
         button.addEventListener('click', function (e) {
-            e.preventDefault();
+            // e.preventDefault();
             readWriteFile('write');
         });
 
